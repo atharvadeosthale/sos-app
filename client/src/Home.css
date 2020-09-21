@@ -1,0 +1,59 @@
+.home__map {
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+}
+.home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+}
+.home__login {
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 30px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.home__login > form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.home__inputContainer {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+}
+.home__inputContainer > input {
+  border: none;
+  margin-left: 10px;
+}
+.home__inputContainer > input:focus {
+  outline: none;
+}
+.home__button {
+  padding: 15px;
+  border: none;
+  background-color: #8e44ad;
+  width: 120px;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 20px;
+  transition: all 100ms ease-in;
+}
+.home__button:hover {
+  background-color: #612e76;
+}
+.home__button:focus {
+  outline: none;
+}

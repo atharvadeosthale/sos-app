@@ -1,0 +1,23 @@
+.navbar {
+  height: 60px;
+  background-color: #8e44ad;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  justify-content: space-between;
+  z-index: 100;
+}
+.navbar__link {
+  text-decoration: none;
+  color: white;
+}
+.navbar__left {
+  color: white;
+  margin-left: 30px;
+  font-size: 20px;
+}
+.navbar__right {
+  margin-right: 30px;
+  color: white;
+}
