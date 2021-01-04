@@ -5,6 +5,8 @@ export const initialState = {
     role: null,
     token: null,
   },
+  auth: true,
+  position: { lat: 2, lng: 2 },
 };
 
 const reducer = (state, action) => {
@@ -14,6 +16,13 @@ const reducer = (state, action) => {
       return {
         ...state,
         user: action.user,
+        auth: true,
+      };
+    case "SET_POSITION":
+      console.log("I'm in the reducer", action.position);
+      return {
+        ...state,
+        position: action.position,
       };
     default:
       return state;

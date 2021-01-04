@@ -1,12 +1,13 @@
 import React from "react";
 import "./Home.css";
-import { LoadScript, GoogleMap } from "@react-google-maps/api";
+import { GoogleMap } from "@react-google-maps/api";
 import { AccountCircle, Lock } from "@material-ui/icons";
 import { useState, useEffect } from "react";
 import axios from "./axios";
 import { useStateValue } from "./StateProvider";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import io from "./background/socket";
 
 function Home() {
   const history = useHistory();
@@ -15,6 +16,7 @@ function Home() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // eslint-disable-next-line
   const [{ user }, dispatch] = useStateValue();
 
   useEffect(() => {
@@ -24,21 +26,28 @@ function Home() {
         lng: position.coords.longitude,
       })
     );
+    console.log("Position - ", position);
   }, []);
 
   const attemptLogin = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post("/login", { email, password });
+
       dispatch({
         type: "SET_USER",
         user: res.data,
       });
+
+      io.emit("auth", res.data.token);
+
       if (res.data.role === "user") {
         // push to user dashboard
+        history.push("/dashboard/user");
         toast.success("Login success as user");
       } else {
         // push to hospital dashboard
+        history.push("/dashboard/hospital");
         toast.success("Login success as hospital");
       }
     } catch (err) {
@@ -53,13 +62,11 @@ function Home() {
   return (
     <div className="home">
       <div className="home__map">
-        <LoadScript googleMapsApiKey="AIzaSyBLP_Yh3tf9ci2ZEvx1JasDmn6rR2-rf5E">
-          <GoogleMap
-            mapContainerStyle={{ height: "100vh", width: "100%" }}
-            zoom={17}
-            center={position}
-          />
-        </LoadScript>
+        <GoogleMap
+          mapContainerStyle={{ height: "100vh", width: "100%" }}
+          zoom={17}
+          center={position}
+        />
       </div>
       <div className="home__login">
         <form>
@@ -74,14 +81,14 @@ function Home() {
           </div>
           <div className="home__inputContainer">
             <Lock />
-            <input type="password" placeholder="Password" />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
-          <button
-            className="home__button"
-            onClick={attemptLogin}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          >
+          <button className="home__button" onClick={attemptLogin}>
             Login
           </button>
         </form>

@@ -1,7 +1,11 @@
 import express from "express";
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
+import bodyParser from "body-parser";
 const router = express.Router();
+
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
 
 router.get("/", (req, res) => {
   res.json({ message: "API up and running" });
@@ -11,7 +15,7 @@ router.get("/", (req, res) => {
 // @desc Login Route
 router.post("/login", async (req, res) => {
   if (!req.body.email || !req.body.password) {
-    console.log("imhere");
+    // console.log("imhere");
     return res.status(400).json({ message: "All the fields are required" });
   }
   const { email, password } = req.body;

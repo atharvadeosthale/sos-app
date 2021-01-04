@@ -1,0 +1,46 @@
+.userDashboard__map {
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.userDashboard {
+  display: flex;
+  align-items: flex-end;
+  height: 100vh;
+  width: 100%;
+  justify-content: space-around;
+}
+.userDashboard__panel {
+  z-index: 10;
+  display: flex;
+
+  justify-content: space-between;
+  background-color: white;
+  width: 50%;
+  padding: 20px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  box-shadow: 3px 3px 5px;
+}
+.userDashboard__panelText {
+  display: flex;
+  align-items: center;
+}
+.userDashboard__sosBtn {
+  padding: 20px;
+  border-radius: 100%;
+  border: none;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  box-shadow: black 1px 1px 3px;
+  transition: all 100ms ease-in;
+}
+.userDashboard__sosBtn:hover {
+  background-color: #8a0707;
+}
+.userDashboard__sosBtn:focus {
+  outline: none;
+}
